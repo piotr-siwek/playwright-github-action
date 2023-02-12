@@ -1,5 +1,9 @@
 name: Playwright Tests
-on: [push]
+on: 
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 jobs:
   test-e2e:
     timeout-minutes: 60
@@ -14,7 +18,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --reporter=list
       - uses: actions/upload-artifact@v3
         if: always()
         with:
